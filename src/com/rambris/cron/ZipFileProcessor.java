@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
  * files in a directory
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: ZipFileProcessor.java 29 2010-05-30 14:55:16Z boost $
  */
 abstract public class ZipFileProcessor implements FileProcessor
 {

@@ -13,7 +13,6 @@ import org.apache.commons.dbcp.BasicDataSource;
  * connection every time.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: DatabasePool.java 33 2010-08-21 14:12:05Z boost $
  * 
  */
 public class DatabasePool extends Database

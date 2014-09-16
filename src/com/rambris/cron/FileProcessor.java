@@ -8,7 +8,6 @@ import java.io.IOException;
  * Process accepts a file and process it
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: FileProcessor.java 29 2010-05-30 14:55:16Z boost $
  */
 public interface FileProcessor extends FileFilter
 {

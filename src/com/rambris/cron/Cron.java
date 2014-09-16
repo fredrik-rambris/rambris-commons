@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
  * All asynchronous tasks gets run by this class
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Cron.java 29 2010-05-30 14:55:16Z boost $
  */
 public class Cron extends ScheduledThreadPoolExecutor
 {

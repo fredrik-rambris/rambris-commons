@@ -7,7 +7,6 @@ import java.util.Map;
  * Generates HTML tables
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: HTMLTable.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public class HTMLTable extends Table

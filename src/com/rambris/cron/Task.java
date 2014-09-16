@@ -6,7 +6,6 @@ import java.util.Date;
  * Our own runnables with extra features
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Task.java 29 2010-05-30 14:55:16Z boost $
  */
 public abstract class Task implements Runnable
 {

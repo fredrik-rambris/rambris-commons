@@ -21,7 +21,6 @@ import org.apache.log4j.Logger;
  * Database abstraction and support methods.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Database.java 33 2010-08-21 14:12:05Z boost $
  * 
  */
 public abstract class Database

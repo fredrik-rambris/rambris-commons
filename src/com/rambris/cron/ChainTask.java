@@ -7,7 +7,6 @@ import java.util.List;
  * Runns a chain of tasks
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: ChainTask.java 29 2010-05-30 14:55:16Z boost $
  */
 public class ChainTask extends Task
 {

@@ -23,7 +23,6 @@ import com.sun.mail.smtp.SMTPTransport;
  * Make sending emails easy.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Message.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public class Message extends SMTPMessage

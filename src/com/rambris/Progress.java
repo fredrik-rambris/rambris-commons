@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
  * Calculates progress, ETA etc.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Progress.java 33 2010-08-21 14:12:05Z boost $
  * 
  */
 public class Progress

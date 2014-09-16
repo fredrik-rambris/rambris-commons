@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
  * Watch a directory and process the files in it
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: WatchDirectoryTask.java 29 2010-05-30 14:55:16Z boost $
  */
 public class WatchDirectoryTask extends Task
 {

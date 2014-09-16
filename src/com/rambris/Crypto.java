@@ -1,11 +1,5 @@
 package com.rambris;
 
-/**
- * Crypto.java version $id$
- *
- * Copyright (c) 2008-2010 Fredrik Rambris. All rights reserved.
- */
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.Charset;

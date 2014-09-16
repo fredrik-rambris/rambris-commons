@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
  * A simple implementation of Database that returns a real connection each time.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: SimpleDatabase.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public class SimpleDatabase extends Database

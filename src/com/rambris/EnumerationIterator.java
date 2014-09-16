@@ -1,4 +1,3 @@
-/* EnumerationIterator.java (c) 2010 Fredrik Rambris. All rights reserved */
 package com.rambris;
 
 import java.util.Enumeration;
@@ -6,8 +5,6 @@ import java.util.Iterator;
 
 /**
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: EnumerationIterator.java 45 2010-09-01 16:10:39Z boost $
- * 
  */
 public class EnumerationIterator<I> implements Iterator<I>, Iterable<I>
 {

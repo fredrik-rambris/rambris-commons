@@ -9,7 +9,6 @@ import java.util.Map;
  * An adaption of Table that creates a definition table of key and values.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: DefinitionTable.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public class DefinitionTable extends TextTable

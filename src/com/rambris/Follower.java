@@ -10,7 +10,6 @@ import java.util.concurrent.LinkedBlockingDeque;
  * Java implementation of tail --follow
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Follower.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public class Follower extends Thread

@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
  * Static utility functions
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Util.java 45 2010-09-01 16:10:39Z boost $
  */
 public class Util
 {

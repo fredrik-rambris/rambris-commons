@@ -14,7 +14,6 @@ import java.util.Vector;
  * Generate text representations of tabular data. Abstract base class
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Table.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public abstract class Table

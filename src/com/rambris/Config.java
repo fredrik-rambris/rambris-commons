@@ -19,7 +19,6 @@ import org.apache.log4j.PropertyConfigurator;
  * Handles configuration
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: Config.java 28 2010-05-23 19:47:55Z boost $
  */
 public class Config extends XMLConfiguration
 {

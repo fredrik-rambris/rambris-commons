@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
  * Moves the file to destination directory
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: MoverFileProcessor.java 29 2010-05-30 14:55:16Z boost $
  */
 public class MoverFileProcessor implements FileProcessor
 {

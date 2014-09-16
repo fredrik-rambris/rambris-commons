@@ -11,7 +11,6 @@ import java.util.Map;
  * client.
  * 
  * @author Fredrik Rambris <fredrik@rambris.com>
- * @version $Id: TextTable.java 27 2010-05-23 18:48:54Z boost $
  * 
  */
 public class TextTable extends Table
