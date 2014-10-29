@@ -42,6 +42,10 @@ public class HTMLTable extends Table
 		out.println("<table" + (opts.containsKey("table") ? " " + opts.get("table") : "") + ">");
 		out.println("<thead>");
 		out.print("<tr" + (opts.containsKey("tr") ? " " + opts.get("tr") : "") + ">");
+		if(isRowNumbers())
+		{
+			out.print("<th>#</th>");
+		}
 		for (Map.Entry<String, String> col : columns.entrySet())
 		{
 			out.print("<th" + (opts.containsKey("th") ? " " + opts.get("th") : "") + ">" + col.getValue() + "</th>");
@@ -49,9 +53,15 @@ public class HTMLTable extends Table
 		out.println("</tr>");
 		out.println("</thead>");
 		out.println("<tbody>");
+		int rowno=1;
 		for (Map<String, String> row : rows)
 		{
 			out.print("<tr" + (opts.containsKey("tr") ? " " + opts.get("tr") : "") + ">");
+			if(isRowNumbers())
+			{
+				out.print("<th>"+Integer.toString(rowno)+"</th>");
+			}
+
 			for (Map.Entry<String, String> col : columns.entrySet())
 			{
 				String what = row.get(col.getKey());
@@ -60,6 +70,7 @@ public class HTMLTable extends Table
 				else out.print("<td" + (opts.containsKey("td") ? " " + opts.get("td") : "") + "></td>");
 			}
 			out.println("</tr>");
+			rowno++;
 		}
 		out.println("</tbody>");
 		out.println("</table>");

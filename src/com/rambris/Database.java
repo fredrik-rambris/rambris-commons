@@ -1,5 +1,10 @@
 package com.rambris;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -380,6 +385,83 @@ public abstract class Database
 			}
 		}
 		return row;
+	}
+	
+	/**
+	 * Save bean to table.
+	 * TODO: WIP
+	 * @param table
+	 * @param bean
+	 */
+	public void saveBean(String table, Object bean)
+	{
+	
+		try
+		{
+			long id=(Long) bean.getClass().getDeclaredMethod("getId", null).invoke(bean, null);
+			BeanInfo beanInfo=Introspector.getBeanInfo(bean.getClass());
+			StringBuilder fields=new StringBuilder();
+			StringBuilder values=new StringBuilder();
+			for(PropertyDescriptor prop:beanInfo.getPropertyDescriptors())
+			{
+				if(id!=0)
+				{
+					if(prop.getName().equalsIgnoreCase("id")) continue;
+					values.append(", `" + prop.getName() + "`=?");
+				}
+				else
+				{
+					fields.append(", `"+prop.getName()+"`");
+					values.append(", ?");
+				}
+			}
+			StringBuilder query=new StringBuilder();
+			if(id!=0)
+			{
+				query.append("UPDATE `"+table+"` SET ");
+				query.append(values.substring(2));
+				query.append(" WHERE `id`=?");
+			}
+			else
+			{
+				query.append("INSERT INTO `"+table+"` (");
+				query.append(fields.substring(2));
+				query.append(") VALUES (");
+				query.append(values.substring(2));
+				query.append(")");
+			}
+			System.out.println(query);
+		}
+		catch (IntrospectionException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (InvocationTargetException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (NoSuchMethodException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

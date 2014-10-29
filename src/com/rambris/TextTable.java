@@ -15,10 +15,10 @@ import java.util.Map;
  */
 public class TextTable extends Table
 {
-	static char vertChar = '|';
-	static char horizChar = '-';
-	static char crossChar = '+';
-	static char padChar = ' ';
+	protected char vertChar = '|';
+	protected char horizChar = '-';
+	protected char crossChar = '+';
+	protected char padChar = ' ';
 
 	public TextTable()
 	{
@@ -47,6 +47,7 @@ public class TextTable extends Table
 	public Map<String, Integer> calcLengths()
 	{
 		Map<String, Integer> lengths = new LinkedHashMap<String, Integer>();
+		if(isRowNumbers()) lengths.put("#", Integer.toString(rows.size()).length());
 		for (Map.Entry<String, String> col : columns.entrySet())
 		{
 			lengths.put(col.getKey(), col.getValue().length());
@@ -95,9 +96,18 @@ public class TextTable extends Table
 	{
 		Map<String, Integer> lengths = calcLengths();
 		int rep;
+		int rowno=1;
 
 		line(out, lengths);
 		out.print(vertChar);
+		if(isRowNumbers())
+		{
+			int length = lengths.get("#");
+			out.print(padChar + "#" + padChar);
+			strRepeat(out, padChar, length - 1);
+			out.print(vertChar);
+		}
+
 		for (Map.Entry<String, String> col : columns.entrySet())
 		{
 			int length = lengths.get(col.getKey());
@@ -110,6 +120,16 @@ public class TextTable extends Table
 		for (Map<String, String> row : rows)
 		{
 			out.print(vertChar);
+
+			if(isRowNumbers())
+			{
+				int length = lengths.get("#");
+				String value = String.format("%"+length+"d", rowno);
+				out.print(padChar + value + padChar);
+				strRepeat(out, padChar, length - value.length());
+				out.print(vertChar);
+			}
+			
 			for (Map.Entry<String, String> col : columns.entrySet())
 			{
 				int length = lengths.get(col.getKey());
@@ -120,6 +140,7 @@ public class TextTable extends Table
 				out.print(vertChar);
 			}
 			out.println();
+			rowno++;
 		}
 		line(out, lengths);
 		out.println();

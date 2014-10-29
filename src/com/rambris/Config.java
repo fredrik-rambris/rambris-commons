@@ -49,6 +49,7 @@ public class Config extends XMLConfiguration
 		/* Configure logging if possible. Either via external properties-file */
 		if (this.containsKey("log_config"))
 		{
+			Logger.getRootLogger().removeAllAppenders();
 			PropertyConfigurator.configureAndWatch(getString("log_config"), 5000);
 		}
 		else

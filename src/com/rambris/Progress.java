@@ -93,6 +93,8 @@ public class Progress
 		average.set(unitsPerTimeUnit);
 		return current - last;
 	}
+	
+
 
 	public Date getETA()
 	{

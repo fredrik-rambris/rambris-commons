@@ -21,6 +21,7 @@ public abstract class Table
 	protected Map<String, String> columns = new LinkedHashMap<String, String>();
 	protected Vector<Map<String, String>> rows = new Vector<Map<String, String>>();
 	protected Map<String, String> opts = new HashMap<String, String>();
+	private boolean rowNumbers=false;
 
 	public Table(Map<String, String> columns)
 	{
@@ -96,5 +97,21 @@ public abstract class Table
 			}
 			addRow(row);
 		}
+	}
+
+	/**
+	 * @return the rowNumbers
+	 */
+	public boolean isRowNumbers()
+	{
+		return rowNumbers;
+	}
+
+	/**
+	 * @param rowNumbers the rowNumbers to set
+	 */
+	public void setRowNumbers(boolean rowNumbers)
+	{
+		this.rowNumbers = rowNumbers;
 	}
 }
