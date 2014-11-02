@@ -114,4 +114,9 @@ public abstract class Table
 	{
 		this.rowNumbers = rowNumbers;
 	}
+	
+	public void enableRowNumbers()
+	{
+		this.rowNumbers=true;
+	}
 }

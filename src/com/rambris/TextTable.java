@@ -145,4 +145,5 @@ public class TextTable extends Table
 		line(out, lengths);
 		out.println();
 	}
+
 }
