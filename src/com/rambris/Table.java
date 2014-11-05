@@ -50,6 +50,7 @@ public abstract class Table
 	{
 		if("html".equalsIgnoreCase(type)) return new HTMLTable(columns);
 		else if("simple".equalsIgnoreCase(type)) return new SimpleTextTable(columns);
+		else if("tab".equalsIgnoreCase(type)) return new TabTable(columns);
 		else return new TextTable(columns);
 	}
 
@@ -57,6 +58,7 @@ public abstract class Table
 	{
 		if("html".equalsIgnoreCase(type)) return new HTMLTable();
 		else if("simple".equalsIgnoreCase(type)) return new SimpleTextTable();
+		else if("tab".equalsIgnoreCase(type)) return new TabTable();
 		else return new TextTable();
 	}
 	
