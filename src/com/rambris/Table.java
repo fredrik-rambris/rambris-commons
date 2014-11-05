@@ -39,6 +39,27 @@ public abstract class Table
 
 	}
 
+	public static Table GetInstance(String type, Map<String, String> columns, Map<String, String> opts)
+	{
+		if("html".equalsIgnoreCase(type)) return new HTMLTable(columns, opts);
+		else if("simple".equalsIgnoreCase(type)) return new SimpleTextTable(columns, opts);
+		else return new TextTable(columns, opts);
+	}
+
+	public static Table GetInstance(String type, Map<String, String> columns)
+	{
+		if("html".equalsIgnoreCase(type)) return new HTMLTable(columns);
+		else if("simple".equalsIgnoreCase(type)) return new SimpleTextTable(columns);
+		else return new TextTable(columns);
+	}
+
+	public static Table GetInstance(String type)
+	{
+		if("html".equalsIgnoreCase(type)) return new HTMLTable();
+		else if("simple".equalsIgnoreCase(type)) return new SimpleTextTable();
+		else return new TextTable();
+	}
+	
 	public Table(Table table)
 	{
 		this.columns = table.columns;
