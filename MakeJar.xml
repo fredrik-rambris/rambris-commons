@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration of the Ant build system to generate a Jar file --> 
+<project name="rambris-commons" default="CreateJar">
+  <target name="CreateJar" description="Create Jar file">
+   <delete file="../lib/rambris-commons.jar"/>
+   <jar destfile="../lib/rambris-commons.jar" basedir="classes"/>
+  </target>
+</project>
