@@ -27,7 +27,7 @@ public abstract class RestrictedPage extends Page
 	 * @throws RedirectedException
 	 * @throws IOException
 	 */
-	public RestrictedPage(WebServlet servlet, HttpServletRequest request, HttpServletResponse response, WebApp app) throws IOException,
+	public RestrictedPage(WebAppServlet servlet, HttpServletRequest request, HttpServletResponse response, WebApp app) throws IOException,
 			RedirectedException, SQLException
 	{
 		super(servlet, request, response, app);

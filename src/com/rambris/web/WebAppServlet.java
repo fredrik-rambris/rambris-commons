@@ -18,8 +18,9 @@ import org.apache.log4j.Logger;
  * @author Fredrik Rambris <fredrik@rambris.com>
  *
  */
-public abstract class WebServlet extends HttpServlet
+public abstract class WebAppServlet extends HttpServlet
 {
+	private static final long serialVersionUID = 1L;
 	private WebApp app;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -33,7 +34,7 @@ public abstract class WebServlet extends HttpServlet
 	 * @param configFile may be null if the application can derive the location for itself
 	 * @return
 	 */
-	protected abstract WebApp initApp(String configFile);
+	protected abstract WebApp initApp(String configFile) throws Exception;
 
 	/**
 	 * @see DNSServlet#init(ServletConfig)
@@ -42,7 +43,7 @@ public abstract class WebServlet extends HttpServlet
 	public void init(ServletConfig config) throws ServletException
 	{
 		super.init(config);
-		log = Logger.getLogger(WebServlet.class);
+		log = Logger.getLogger(WebAppServlet.class);
 		try
 		{
 			app=initApp(config.getInitParameter("configfile"));
@@ -52,7 +53,7 @@ public abstract class WebServlet extends HttpServlet
 				// If we do not set the base package of Page we derive it from
 				// the application class and assume that there is a sub package
 				// called "web"
-				pageBase=app.getClass().getPackage().toString() + ".web";
+				pageBase=app.getClass().getPackage().getName() + ".web";
 				log.info("Page package base is set to "+pageBase);
 			}
 		}
@@ -67,7 +68,7 @@ public abstract class WebServlet extends HttpServlet
 	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected final void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 
 		this.request = request;
@@ -94,7 +95,7 @@ public abstract class WebServlet extends HttpServlet
 	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected final void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}
@@ -104,7 +105,7 @@ public abstract class WebServlet extends HttpServlet
 		return app;
 	}
 	
-	private void invoke(String[] parts) throws IOException
+	private final void invoke(String[] parts) throws IOException
 	{
 		Page page = null;
 		if (parts[0].isEmpty()) parts[0] = "Index";
@@ -124,10 +125,9 @@ public abstract class WebServlet extends HttpServlet
 			// All pages must end with Page and be in the pageBase;
 			String className = pageBase + "." + parts[0] + "Page";
 			Class<? extends Page> pageClass = (Class<? extends Page>) Class.forName(className);
-
 			try
 			{
-				page = pageClass.getConstructor(WebServlet.class, HttpServletRequest.class, HttpServletResponse.class, WebApp.class).newInstance(
+				page = pageClass.getConstructor(WebAppServlet.class, HttpServletRequest.class, HttpServletResponse.class, WebApp.class).newInstance(
 						this, request, response, app);
 				page.run(args);
 			}
@@ -143,7 +143,7 @@ public abstract class WebServlet extends HttpServlet
 		}
 		catch (ClassNotFoundException e)
 		{
-			log.error(e.getMessage() + " not found");
+			log.error(e.getMessage() + " not found", e);
 			response.sendError(404, parts[0] + " not found");
 		}
 		catch (ClientAbortException e)
@@ -152,7 +152,7 @@ public abstract class WebServlet extends HttpServlet
 		}
 		catch (NotFoundException e)
 		{
-			log.error(e.getMessage());
+			log.error(e.getMessage(), e);
 			response.sendError(404, e.getMessage());
 		}
 		catch (RedirectedException e)
@@ -168,7 +168,6 @@ public abstract class WebServlet extends HttpServlet
 			if (e.getCause() != null) log.error(e.getCause().getMessage(), e.getCause());
 			log.error(e.getMessage(), e);
 			response.sendError(500, e.getMessage());
-
 		}
 		finally
 		{

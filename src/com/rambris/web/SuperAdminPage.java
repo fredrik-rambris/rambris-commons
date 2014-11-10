@@ -25,7 +25,7 @@ public abstract class SuperAdminPage extends RestrictedPage
 	 * @throws SQLException
 	 * @throws PermissionDeniedException
 	 */
-	public SuperAdminPage(WebServlet servlet, HttpServletRequest request, HttpServletResponse response, WebApp app) throws IOException,
+	public SuperAdminPage(WebAppServlet servlet, HttpServletRequest request, HttpServletResponse response, WebApp app) throws IOException,
 			RedirectedException, SQLException, PermissionDeniedException
 	{
 		super(servlet, request, response, app);

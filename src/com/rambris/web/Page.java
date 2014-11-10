@@ -25,7 +25,7 @@ import com.rambris.EnumerationIterator;
  */
 public abstract class Page
 {
-	protected WebServlet servlet;
+	protected WebAppServlet servlet;
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	private final HashSet<String> temporaryAttributes = new HashSet<String>();
@@ -196,7 +196,7 @@ public abstract class Page
 		response.getWriter().println("<a href=\"" + path + "\">" + path + "</a>");
 	}
 
-	public Page(WebServlet servlet, HttpServletRequest request, HttpServletResponse response, WebApp app)
+	public Page(WebAppServlet servlet, HttpServletRequest request, HttpServletResponse response, WebApp app)
 	{
 		this.servlet = servlet;
 		this.request = request;
