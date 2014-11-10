@@ -1,5 +1,5 @@
 /* NotFoundException.java (c) 2014 Fredrik Rambris. All rights reserved */
-package web;
+package com.rambris.web;
 
 /**
  * @author Fredrik Rambris <fredrik@rambris.com>

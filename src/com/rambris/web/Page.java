@@ -1,5 +1,5 @@
 /* Page.java (c) 2014 Fredrik Rambris. All rights reserved */
-package web;
+package com.rambris.web;
 
 import java.io.IOException;
 import java.util.Arrays;

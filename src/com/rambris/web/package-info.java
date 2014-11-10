@@ -4,4 +4,4 @@
  * @author Fredrik Rambris <fredrik@rambris.com>
  *
  */
-package web;
+package com.rambris.web;

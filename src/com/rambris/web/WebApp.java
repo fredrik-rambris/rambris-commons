@@ -1,5 +1,5 @@
 /* WebApp.java (c) 2014 Fredrik Rambris. All rights reserved */
-package web;
+package com.rambris.web;
 
 import com.rambris.Config;
 import com.rambris.Database;
