@@ -16,6 +16,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.rambris.Config;
 import com.rambris.Database;
 import com.rambris.EnumerationIterator;
@@ -34,6 +36,7 @@ public abstract class Page
 	protected Config config;
 	protected String return_to = null;
 	protected Map<String, String> cookies = null;
+	protected Logger log=Logger.getLogger(this.getClass());
 
 	/** ROOT is the root of application (/TheApplication) */
 	protected String ROOT;
@@ -220,6 +223,7 @@ public abstract class Page
 		setAttribute("module", MODULE);
 		setAttribute("pageName", className);
 		setAttribute("version", app.getVersion());
+		setAttribute("staticPrefix", config.getString("web.static_prefix", ROOT+"/static"));
 	}
 
 	private Map<String, String> getCookies()
@@ -252,6 +256,7 @@ public abstract class Page
 
 	protected void notFound(String message) throws IOException
 	{
+		log.warn(message);
 		response.sendError(404, message);
 	}
 

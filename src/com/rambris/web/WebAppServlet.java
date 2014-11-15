@@ -25,7 +25,7 @@ public abstract class WebAppServlet extends HttpServlet
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	public String localURI;
-	private Logger log;
+	private final Logger log=Logger.getLogger(WebAppServlet.class);
 	private String pageBase;
 	
 	/**
@@ -43,7 +43,6 @@ public abstract class WebAppServlet extends HttpServlet
 	public void init(ServletConfig config) throws ServletException
 	{
 		super.init(config);
-		log = Logger.getLogger(WebAppServlet.class);
 		try
 		{
 			app=initApp(config.getInitParameter("configfile"));
@@ -129,6 +128,7 @@ public abstract class WebAppServlet extends HttpServlet
 			{
 				page = pageClass.getConstructor(WebAppServlet.class, HttpServletRequest.class, HttpServletResponse.class, WebApp.class).newInstance(
 						this, request, response, app);
+				log.info(parts[0]+"("+args+")");
 				page.run(args);
 			}
 			catch (InvocationTargetException e)
@@ -167,7 +167,7 @@ public abstract class WebAppServlet extends HttpServlet
 		{
 			if (e.getCause() != null) log.error(e.getCause().getMessage(), e.getCause());
 			log.error(e.getMessage(), e);
-			response.sendError(500, e.getMessage());
+			if(!response.isCommitted()) response.sendError(500, e.getMessage());
 		}
 		finally
 		{
