@@ -2,6 +2,11 @@ package com.rambris;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -40,6 +45,25 @@ public class GZip
 		catch (Exception e)
 		{
 			return null;
+		}
+	}
+	
+	/**
+	 * Opens a file whether it is gzipped or not
+	 * @param path
+	 * @return
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	public static InputStream OpenGZipFile(File path) throws FileNotFoundException, IOException
+	{
+		if(path.getName().endsWith(".gz"))
+		{
+			return new GZIPInputStream(new FileInputStream(path));
+		}
+		else
+		{
+			return new FileInputStream(path);
 		}
 	}
 }
