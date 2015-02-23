@@ -51,6 +51,29 @@ public class WatchDirectoryTask extends Task
 	{
 		return postprocessor;
 	}
+	
+	protected void processFile(File file)
+	{
+		try
+		{
+			if (preprocessor != null)
+			{
+				log.debug("Pre-Processing file: " + file.getAbsolutePath());
+				if (!preprocessor.process(file)) return;
+			}
+			log.info("Processing file: " + file.getAbsolutePath());
+			if (!processor.process(file)) return;
+			if (postprocessor != null)
+			{
+				log.debug("Post-Processing file: " + file.getAbsolutePath());
+				if (!postprocessor.process(file)) return;
+			}
+		}
+		catch (Exception e)
+		{
+			log.error("Could not process file: " + file.getName(), e);
+		}		
+	}
 
 	@Override
 	public void start()
@@ -59,25 +82,7 @@ public class WatchDirectoryTask extends Task
 		for (File file : directory.listFiles(processor))
 		{
 			log.debug("Found file: " + file.getPath());
-			try
-			{
-				if (preprocessor != null)
-				{
-					log.debug("Pre-Processing file: " + file.getAbsolutePath());
-					if (!preprocessor.process(file)) continue;
-				}
-				log.debug("Processing file: " + file.getAbsolutePath());
-				if (!processor.process(file)) continue;
-				if (postprocessor != null)
-				{
-					log.debug("Post-Processing file: " + file.getAbsolutePath());
-					if (!postprocessor.process(file)) continue;
-				}
-			}
-			catch (IOException e)
-			{
-				log.error("Could not process file: " + file.getName(), e);
-			}
+			processFile(file);
 		}
 	}
 

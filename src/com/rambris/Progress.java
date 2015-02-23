@@ -17,9 +17,12 @@ public class Progress
 	private final double total;
 	private double last;
 	private long before;
+	private boolean done=false;
 
 	private double unitsPerTimeUnit;
 	private final Average average;
+	
+	private short decimals=1;
 
 	class Average
 	{
@@ -104,7 +107,7 @@ public class Progress
 
 	public String getThroughput()
 	{
-		return String.format("%.1f/%s", average.get(), timeUnit);
+		return String.format("%."+decimals+"f/%s", average.get(), timeUnit);
 	}
 
 	public double getAverage()
@@ -117,11 +120,11 @@ public class Progress
 	{
 		if (total != 0)
 		{
-			return String.format("%.1f/%.1f, %.1f/%s", current, total, average.get(), timeUnit);
+			return String.format("%."+decimals+"f/%."+decimals+"f, %."+decimals+"f/%s", current, total, average.get(), timeUnit);
 		}
 		else
 		{
-			return String.format("%.1f, %.1f/%s", current, average.get(), timeUnit);
+			return String.format("%."+decimals+"f, %."+decimals+"f/%s", current, average.get(), timeUnit);
 		}
 	}
 
@@ -134,7 +137,7 @@ public class Progress
 	{
 		long now = System.currentTimeMillis();
 		double timeSpent = (now - before) / 1000.0 / units;
-		return String.format("%.1f%s", timeSpent, timeUnit);
+		return String.format("%."+decimals+"f%s", timeSpent, timeUnit);
 	}
 
 	public long getSecondsSpent()
@@ -145,5 +148,45 @@ public class Progress
 	public double getCurrent()
 	{
 		return current;
+	}
+	
+	/**
+	 * When were we last updated
+	 * @return
+	 */
+	public long getWhenUpdated()
+	{
+		return before;
+	}
+	
+	public int getAge()
+	{
+		return Math.round((System.currentTimeMillis()-before)/1000.0f);
+	}
+
+	public boolean isDone()
+	{
+		return done;
+	}
+
+	public void setDone(boolean done)
+	{
+		this.done = done;
+	}
+
+	/**
+	 * @return the number of decimals shown
+	 */
+	public short getDecimals()
+	{
+		return decimals;
+	}
+
+	/**
+	 * @param decimals the number of decimals to show
+	 */
+	public void setDecimals(int decimals)
+	{
+		this.decimals = (short)decimals;
 	}
 }
