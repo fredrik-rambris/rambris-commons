@@ -84,7 +84,7 @@ public class Cron extends ScheduledThreadPoolExecutor
 	 */
 	public void scheduleDaily(Task job, Date start)
 	{
-		long now = new Date().getTime();
+		long now = System.currentTimeMillis();
 		long then = start.getTime();
 		long day = 3600000L * 24L;
 		then = then % day;
@@ -100,9 +100,34 @@ public class Cron extends ScheduledThreadPoolExecutor
 		DateFormat df = DateFormat.getTimeInstance(DateFormat.MEDIUM, new Locale("sv"));
 		scheduleDaily(job, df.parse(start));
 	}
+	
+	public void scheduleMinutely(Task job, long delay)
+	{
+		if(delay<1)
+		{
+			log.warn("Cannot schedule "+job+" for less than 1 minute");
+			return;
+		}
+		log.info("Scheduling " + job + " to be run every " + delay + " minutes");
+		scheduleWithFixedDelay(job, delay, delay, TimeUnit.MINUTES);
+	}
 
 	public void addCronjob(String name, Task task)
 	{
 		cronjobs.put(name, task);
+	}
+	
+	public void disableAll()
+	{
+		for(Map.Entry<String, Task> e:cronjobs.entrySet())
+		{
+			Task task=e.getValue();
+			String name=e.getKey();
+			if(task.isActive())
+			{
+				log.debug("Deactivating" + " " + name);
+				task.setActive(false);
+			}
+		}
 	}
 }

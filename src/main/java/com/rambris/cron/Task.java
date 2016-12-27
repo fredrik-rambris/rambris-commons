@@ -2,6 +2,8 @@ package com.rambris.cron;
 
 import java.util.Date;
 
+import com.rambris.Progress;
+
 /**
  * Our own runnables with extra features
  * 
@@ -13,6 +15,7 @@ public abstract class Task implements Runnable
 	private Date lastRun = null;
 	private long lastDuration = 0;
 	private boolean running = false;
+	protected Progress progress=null;
 
 	public boolean isActive()
 	{
@@ -67,6 +70,15 @@ public abstract class Task implements Runnable
 	public boolean isRunning()
 	{
 		return running;
+	}
+	
+	/**
+	 * Get the tasks progress
+	 * @return May be NULL
+	 */
+	public Progress getProgress()
+	{
+		return progress;
 	}
 
 	@Override
